@@ -1,20 +1,32 @@
+import { images } from "@/mock/mockImages";
 import Image from "next/image";
 import React from "react";
 import styles from "./page.module.css";
+import { notFound } from "next/navigation";
 
-const BlogDetail = () => {
+const getData = async (id) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+
+  if (!res.ok) {
+    notFound();
+  }
+
+  return res.json();
+};
+
+const BlogDetail = async ({ params }) => {
+  const { id } = params;
+  const data = await getData(id);
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.info}>
-          <h1 className={styles.title}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h1>
+          <h1 className={styles.title}>{data?.title}</h1>
           <p className={styles.desc}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            ullam quia eveniet, ex aperiam suscipit nobis iusto ab maiores
-            quisquam eum voluptatibus quam earum illo. Hic facere animi in
-            eligendi!
+            {data?.title}
+            {data?.title}
+            {data?.title}
           </p>
           <div className={styles.author}>
             <Image
@@ -29,7 +41,7 @@ const BlogDetail = () => {
         </div>
         <div className={styles.imageContainer}>
           <Image
-            src="https://plus.unsplash.com/premium_photo-1682464767558-448de834ed4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1NXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            src={images[id % 8]}
             alt=""
             fill={true}
             className={styles.image}
@@ -39,56 +51,24 @@ const BlogDetail = () => {
 
       <div className={styles.content}>
         <p className={styles.text}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi.ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi.
-          <br/>
-          <br/>
+          {data?.body}
+          {data?.body}
+          {data?.body}
+          <br />
+          <br />
+          {data?.body}
+          {data?.body}
+          {data?.body}
+          {data?.body}
 
-          ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi.ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi.ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi.
-          ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi.
-          ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi.ipsum 
-          <br/>
-          <br/>
-
-          dolor sit amet consectetur adipisicing elit. Quaerat,
-          molestias consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis at, labore atque unde fugit esse molestias alias quo
-          nisi. as consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis aas consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis a
-          as consectetur! Debitis, non aut ex, minima nisi ullam qui
-          officiis magnam omnis unde quia! Eum rerum voluptates, aspernatur
-          corporis, debitis a
+          <br />
+          <br />
+          {data?.body}
+          {data?.body}
+          {data?.body}
+          {data?.body}
+          {data?.body}
+          {data?.body}
         </p>
       </div>
     </div>
